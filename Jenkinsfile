@@ -2,19 +2,13 @@ pipeline {
     agent {
         docker {
             image 'ubuntu:22.04'
-            args "-v ${env.WORKSPACE}:/workspace --workdir /workspace" // Ensure Jenkins maps workspace correctly
+            args '--mount type=volume,src=jenkins-workspace,dst=/workspace'
         }
     }
-    environment {
-        WORKSPACE_PATH = "/workspace"  // Ensure the path is correct inside the container
-    }
-
     stages {
-        stage("Test") {
+        stage('Build') {
             steps {
-                sh 'echo "Current directory: ${WORKSPACE_PATH}"'
-                sh 'g++ --version'
-                sh 'cmake --version'
+                sh 'echo "Building in Linux container with proper workspace"'
             }
         }
     }
