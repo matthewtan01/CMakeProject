@@ -1,8 +1,12 @@
 pipeline {
-    agent { dockerfile true }
+    agent {
+        docker {
+            image 'ubuntu:22.04'
+            args '--workdir /workspace -v /workspace:/workspace' // Override Windows path
+        }
+    }
     environment {
-        // Convert Windows path to Unix path using cygpath
-        WORKSPACE_PATH = sh(script: 'cygpath -u "$WORKSPACE"', returnStdout: true).trim()
+        WORKSPACE_PATH = sh(script: 'pwd', returnStdout: true).trim()  // Ensure Unix path
     }
     stages {
         stage("Test") {
