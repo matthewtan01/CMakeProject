@@ -9,7 +9,10 @@ file(GLOB_RECURSE LIBRARY_HEADERS include/*.h)
 add_library(my_library STATIC ${LIBRARY_SOURCES})
 
 # For spdlog
-target_compile_options(my_library PUBLIC /utf-8)
+if (MSVC)
+    target_compile_options(my_library PUBLIC /utf-8)
+endif()
+
 
 # For std::filesystem
 target_compile_features(my_library PUBLIC cxx_std_17)

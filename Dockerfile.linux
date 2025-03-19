@@ -1,0 +1,24 @@
+FROM ubuntu:22.04 AS builder
+
+RUN apt-get update && apt-get install -y \
+	cmake g++ 
+
+WORKDIR /app
+
+COPY third_party /app/third_party
+COPY lib_project /app/lib_project
+COPY app_project /app/app_project
+COPY test_project /app/test_project
+COPY CMakeLists.txt /app/CMakeLists.txt
+
+RUN mkdir build && cd build && \
+    cmake .. -DCMAKE_BUILD_TYPE=Release && \
+    cmake --build .
+
+
+FROM ubuntu:22.04
+
+WORKDIR /app
+COPY --from=builder /app/build/app_project/my_app .
+
+CMD ["./my_app"]
