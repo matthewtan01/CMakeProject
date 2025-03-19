@@ -1,7 +1,7 @@
 pipeline {
     agent { dockerfile true }
     environment {
-        WORKSPACE_PATH = sh(script: 'pwd', returnStdout: true).trim()) // Get the correct Unix path
+        WORKSPACE_PATH = sh(script: 'pwd', returnStdout: true).trim() // Get the correct Unix path
     }
     stages {
         stage ("Test") {
