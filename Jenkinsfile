@@ -1,8 +1,8 @@
 pipeline {
     agent {
         dockerfile {
-            filename 'Dockerfile'  // Ensure your Dockerfile exists in the workspace
-            additionalBuildArgs '--no-cache'  // Optional: Forces a fresh build
+            filename 'Dockerfile'
+            args '-v /c/Users/tyonghan/AppData/Local/Jenkins/.jenkins/workspace/docker_cmake:/workspace'
         }
     }
     stages {
