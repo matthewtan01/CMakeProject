@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'echo "Running inside windows container" '
+               sh 'echo "Running inside windows container"'
             }
         }
     }
