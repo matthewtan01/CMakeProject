@@ -7,9 +7,23 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               sh 'echo "Running inside linux container"'
-               sh 'g++ --version'
-               sh 'cmake --version'
+                sh '''
+                    g++ --version
+                    cmake --version
+                    mkdir -p build
+                    cd build
+                    cmake ..
+                    cmake --build .
+                '''
+            }
+        }
+
+        stage('Test') {
+            steps { 
+                sh '''
+                    cd build/test_project
+                    ctest --output-on-failure
+                '''
             }
         }
     }

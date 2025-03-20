@@ -55,7 +55,7 @@ void waitForExit() {
 int main() {
     // Initialize loggers
     tcpLogger = LoggerFactory::createTCPLogger("192.168.159.136", 5000, "logs.log");
-    httpLogger = LoggerFactory::createHTTPLogger("http://192.168.159.136:8080", "logs.log");
+    httpLogger = LoggerFactory::createHTTPLogger("http://192.168.159.136:5001", "logs.log");
 
     if (!tcpLogger || !httpLogger){
         std::cerr << "Failed to create loggers." << std::endl;
