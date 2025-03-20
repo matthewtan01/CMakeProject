@@ -13,13 +13,13 @@ protected:
 };
 
 TEST_F(TCPSinkFactoryTest, GetTCPSink_ValidHostPort_ReturnsSink) {
-    auto sink = TCPSinkFactory::GetTCPSink("127.0.0.1", 5000);
+    auto sink = TCPSinkFactory::GetTCPSink("192.168.159.136", 5000);
     ASSERT_NE(sink, nullptr) << "Expected a valid TCP sink but got nullptr";
 }
 
 TEST_F(TCPSinkFactoryTest, GetTCPSink_InvalidPort_ReturnsNullptr) {
     testing::internal::CaptureStderr();  // Capture error messages
-    auto sink = TCPSinkFactory::GetTCPSink("127.0.0.1", 9999);  // Invalid port
+    auto sink = TCPSinkFactory::GetTCPSink("192.168.159.136", 9999);  // Invalid port
     std::string consoleOutput = testing::internal::GetCapturedStderr();
 
     ASSERT_EQ(sink, nullptr) << "Expected nullptr for an invalid TCP connection";

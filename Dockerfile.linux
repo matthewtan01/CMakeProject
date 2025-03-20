@@ -1,7 +1,7 @@
 FROM ubuntu:22.04 AS builder
 
 RUN apt-get update && apt-get install -y \
-	cmake g++ 
+    cmake g++ 
 
 WORKDIR /app
 
@@ -16,9 +16,7 @@ RUN mkdir build && cd build && \
     cmake --build .
 
 
-FROM ubuntu:22.04
+WORKDIR /app/build/test_project
 
-WORKDIR /app
-COPY --from=builder /app/build/app_project/my_app .
-
-CMD ["./my_app"]
+# Run tests using CTest
+CMD ["ctest", "--output-on-failure"]
