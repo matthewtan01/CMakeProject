@@ -7,7 +7,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               sh 'echo "Running inside windows container"'
+               sh 'echo "Running inside linux container"'
+               sh 'g++ --version'
+               sh 'cmake --version'
             }
         }
     }
